@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 19 Ara 2020, 17:35:28
+-- Üretim Zamanı: 20 Ara 2020, 00:05:18
 -- Sunucu sürümü: 10.4.13-MariaDB
 -- PHP Sürümü: 7.4.7
 
@@ -57,9 +57,9 @@ CREATE TABLE `depo` (
 --
 
 INSERT INTO `depo` (`barkod`, `adet`) VALUES
-('000', 49),
-('001', 85),
-('002', 13);
+('000', 13),
+('001', 29),
+('002', 9);
 
 -- --------------------------------------------------------
 
@@ -149,6 +149,25 @@ CREATE TABLE `satis` (
   `tarih` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
+--
+-- Tablo döküm verisi `satis`
+--
+
+INSERT INTO `satis` (`admin_username`, `musteri_tel`, `urun_no`, `adet`, `toplam_fiyat`, `tarih`) VALUES
+('bahattin', '0', '000', 2, 36, '2020-12-20'),
+('bahattin', '0', '000', 2, 6, '2020-12-20'),
+('bahattin', '0', '000', 2, 6, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '1', '001', 5, 266, '2020-12-20'),
+('bahattin', '0', '000', 2, 8, '2020-12-20'),
+('bahattin', '0', '000', 2, 14, '2020-12-20'),
+('bahattin', '0', '000', 2, 8, '2020-12-20'),
+('bahattin', '2', '002', 3, 13, '2020-12-20');
+
 -- --------------------------------------------------------
 
 --
@@ -185,7 +204,8 @@ CREATE TABLE `talep` (
 --
 
 INSERT INTO `talep` (`admin_username`, `tedarikci_tel`, `urun_barkod`, `adet`, `teslim_tarihi`) VALUES
-('bahattin', '05367453496', '000', 25, '2020-12-26');
+('bahattin', '0212', '000', 100, '2020-12-27'),
+('bahattin', '0212', '002', 100, '2020-12-27');
 
 -- --------------------------------------------------------
 
@@ -205,7 +225,28 @@ CREATE TABLE `tedarikci` (
 --
 
 INSERT INTO `tedarikci` (`name`, `surname`, `phone`, `mail`) VALUES
+('Talip', 'Müftüoğlu', '0212', 'tmüf@gmail.com'),
 ('Bahattin', 'Koç', '05367453496', 'bahattink3458@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `tedarikci_mk`
+--
+
+CREATE TABLE `tedarikci_mk` (
+  `tedarikci_tel` varchar(11) COLLATE utf8_turkish_ci NOT NULL,
+  `kategori` varchar(56) COLLATE utf8_turkish_ci NOT NULL,
+  `marka` varchar(56) COLLATE utf8_turkish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `tedarikci_mk`
+--
+
+INSERT INTO `tedarikci_mk` (`tedarikci_tel`, `kategori`, `marka`) VALUES
+('0212', 'Yiyecek', 'Ülker'),
+('05367453496', 'Yiyecek', 'Eti');
 
 -- --------------------------------------------------------
 
@@ -216,8 +257,8 @@ INSERT INTO `tedarikci` (`name`, `surname`, `phone`, `mail`) VALUES
 CREATE TABLE `urun` (
   `barkod` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
   `name` text COLLATE utf8_turkish_ci NOT NULL,
-  `kategori_no` text COLLATE utf8_turkish_ci NOT NULL,
-  `marka_no` text COLLATE utf8_turkish_ci NOT NULL,
+  `kategori` text COLLATE utf8_turkish_ci NOT NULL,
+  `marka` text COLLATE utf8_turkish_ci NOT NULL,
   `fiyat` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
@@ -225,7 +266,7 @@ CREATE TABLE `urun` (
 -- Tablo döküm verisi `urun`
 --
 
-INSERT INTO `urun` (`barkod`, `name`, `kategori_no`, `marka_no`, `fiyat`) VALUES
+INSERT INTO `urun` (`barkod`, `name`, `kategori`, `marka`, `fiyat`) VALUES
 ('002', 'Çikolatalı Gofret', 'Yiyecek', 'Ülker', 3.25),
 ('000', 'Karam', 'Yiyecek', 'Ülker', 2),
 ('001', 'Garnitür', 'Yiyecek', 'TAT', 4.75);
@@ -269,6 +310,12 @@ ALTER TABLE `musteri`
 --
 ALTER TABLE `tedarikci`
   ADD PRIMARY KEY (`phone`);
+
+--
+-- Tablo için indeksler `tedarikci_mk`
+--
+ALTER TABLE `tedarikci_mk`
+  ADD PRIMARY KEY (`tedarikci_tel`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
