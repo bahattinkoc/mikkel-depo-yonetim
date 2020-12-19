@@ -43,6 +43,13 @@ namespace MikkelDepoTalep
                     mikkelDB.command.Parameters.AddWithValue("@mail", txtEposta.Text);
                     mikkelDB.command.ExecuteNonQuery();
 
+                    mikkelDB.LoadDB();
+                    mikkelDB.command.CommandText = "INSERT INTO tedarikci_mk (tedarikci_tel, kategori, marka) VALUES (@tel, @kategori, @marka)";
+                    mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.Text);
+                    mikkelDB.command.Parameters.AddWithValue("@marka", cmbMarka.Text);
+                    mikkelDB.command.Parameters.AddWithValue("@tel", txtTelefon.Text);
+                    mikkelDB.command.ExecuteNonQuery();
+
                     MessageBox.Show("Kaydınız başarıyla tamamlandı!", "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -53,7 +60,7 @@ namespace MikkelDepoTalep
             }
             else
             {
-                MessageBox.Show("Hatanın olası sebepleri;\n* Kutuların boş bırakılması\n* Telefon kısmına harf girilmesi", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hatanın olası sebepleri;\n* Kutuların boş bırakılması\n* Telefon kısmına harf girilmesi\n* Başka bir tedarikcinin tedarik ettiği kategori ve markayı seçmeniz", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -71,10 +78,8 @@ namespace MikkelDepoTalep
                     {
                         string isim = mikkelDB.reader["name"].ToString() + " " + mikkelDB.reader["surname"].ToString();
 
-                        mikkelDB.LoadDB();
-                        mikkelDB.command.CommandText = "DELETE FROM tedarikci WHERE phone = @telefon";
-                        mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
-                        mikkelDB.command.ExecuteNonQuery();
+                        mikkelDB.Delete("DELETE FROM tedarikci WHERE phone='" + txtTelefon.Text + "'");
+                        mikkelDB.Delete("DELETE FROM tedarikci_mk WHERE tedarikci_tel='" + txtTelefon.Text + "'");
 
                         MessageBox.Show(isim + " isimli kişi başarıyla silindi!", "Silme Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
@@ -110,6 +115,9 @@ namespace MikkelDepoTalep
                         txtAdi.Text = mikkelDB.reader["name"].ToString();
                         txtSoyadi.Text = mikkelDB.reader["surname"].ToString();
                         txtEposta.Text = mikkelDB.reader["mail"].ToString();
+                        
+                        cmbKategori.SelectedIndex = cmbKategori.Items.IndexOf(mikkelDB.GetValue("SELECT * FROM tedarikci_mk WHERE tedarikci_tel='" + txtTelefon.Text + "'", "kategori"));
+                        cmbMarka.SelectedIndex = cmbMarka.Items.IndexOf(mikkelDB.GetValue("SELECT * FROM tedarikci_mk WHERE tedarikci_tel='" + txtTelefon.Text + "'", "marka"));
 
                         btnKaydet.Enabled = false;
                         btnGuncelle.Enabled = true;
@@ -145,6 +153,13 @@ namespace MikkelDepoTalep
                     mikkelDB.command.Parameters.AddWithValue("@mail", txtEposta.Text);
                     mikkelDB.command.ExecuteNonQuery();
 
+                    mikkelDB.LoadDB();
+                    mikkelDB.command.CommandText = "UPDATE tedarikci_mk SET kategori=@kategori, marka=@marka WHERE phone = @telefon";
+                    mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
+                    mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.Text);
+                    mikkelDB.command.Parameters.AddWithValue("@marka", cmbMarka.Text);
+                    mikkelDB.command.ExecuteNonQuery();
+
                     MessageBox.Show(txtAdi.Text + " " + txtSoyadi.Text + " isimli kişi başarıyla güncellendi!", "Güncelleme Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -163,6 +178,9 @@ namespace MikkelDepoTalep
         {
             mikkelDB.ComboBoxLoader("kategori", "kategori", cmbKategori);
             mikkelDB.ComboBoxLoader("marka", "marka", cmbMarka);
+
+            cmbKategori.SelectedIndex = 0;
+            cmbMarka.SelectedIndex = 0;
         }
     }
 }
