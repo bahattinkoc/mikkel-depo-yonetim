@@ -36,7 +36,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO tedarikci (name, surname, phone, mail) VALUES (@adi, @soyadi, @telefon, @mail)";
                     mikkelDB.command.Parameters.AddWithValue("@adi", txtAdi.Text);
                     mikkelDB.command.Parameters.AddWithValue("@soyadi", txtSoyadi.Text);
@@ -65,7 +64,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM tedarikci WHERE phone = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -74,7 +72,6 @@ namespace MikkelDepoTalep
                         string isim = mikkelDB.reader["name"].ToString() + " " + mikkelDB.reader["surname"].ToString();
 
                         mikkelDB.LoadDB();
-                        mikkelDB.command = mikkelDB.connection.CreateCommand();
                         mikkelDB.command.CommandText = "DELETE FROM tedarikci WHERE phone = @telefon";
                         mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                         mikkelDB.command.ExecuteNonQuery();
@@ -105,7 +102,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM tedarikci WHERE phone = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -142,7 +138,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "UPDATE tedarikci SET name=@adi, surname=@soyadi, mail=@mail WHERE phone = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.command.Parameters.AddWithValue("@adi", txtAdi.Text);
@@ -162,6 +157,12 @@ namespace MikkelDepoTalep
             {
                 MessageBox.Show("Güncelleme işleminin gerçekleşebilmesi için boş alan bırakmamalısınız!", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void tedarikciEkleSilGuncelle_Load(object sender, EventArgs e)
+        {
+            mikkelDB.ComboBoxLoader("kategori", "kategori", cmbKategori);
+            mikkelDB.ComboBoxLoader("marka", "marka", cmbMarka);
         }
     }
 }

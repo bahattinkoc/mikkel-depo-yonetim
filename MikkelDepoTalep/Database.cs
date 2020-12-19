@@ -26,6 +26,7 @@ namespace MikkelDepoTalep
                 }
 
                 connection.Open();
+                command = connection.CreateCommand();
 
                 if (connection.State != System.Data.ConnectionState.Closed)
                     state = true;
@@ -42,7 +43,6 @@ namespace MikkelDepoTalep
         public string GetValue(string _command, string value)
         {
             LoadDB();
-            command = connection.CreateCommand();
             command.CommandText = _command;
             reader = command.ExecuteReader();
             if (reader.Read())
@@ -62,8 +62,7 @@ namespace MikkelDepoTalep
 
         public bool Delete(string _command)
         {
-            LoadDB();
-            command = connection.CreateCommand();//DELETE FROM sepet WHERE barkod = '002'
+            LoadDB();//DELETE FROM sepet WHERE barkod = '002'
             command.CommandText = _command;
             try
             {
@@ -79,7 +78,6 @@ namespace MikkelDepoTalep
         public void Truncate(string table)
         {
             LoadDB();
-            command = connection.CreateCommand();//DELETE FROM sepet WHERE barkod = '002'
             command.CommandText = "TRUNCATE TABLE " + table;
             try
             {
@@ -88,6 +86,22 @@ namespace MikkelDepoTalep
             catch (Exception)
             {
                 MessageBox.Show("Tablo silme başarısız!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void ComboBoxLoader(string table, string column, ComboBox cmb)
+        {
+            LoadDB();
+            command.CommandText = "SELECT * FROM " + table;
+            try
+            {
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                    cmb.Items.Add(reader[column].ToString());
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Hata yeri: Database.ComboboxLoader\nHata:\n" + error.Message, "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

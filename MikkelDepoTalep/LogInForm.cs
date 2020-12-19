@@ -51,7 +51,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM admin WHERE username = @username AND password = @password";
                     mikkelDB.command.Parameters.AddWithValue("@username", kulAdiText.Text);
                     mikkelDB.command.Parameters.AddWithValue("@password", sifreText.Text);
@@ -94,7 +93,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM admin WHERE username = @username AND password = @password";
                     mikkelDB.command.Parameters.AddWithValue("@username", kulAdiText.Text);
                     mikkelDB.command.Parameters.AddWithValue("@password", sifreText.Text);
@@ -103,7 +101,6 @@ namespace MikkelDepoTalep
                     if (mikkelDB.reader.Read())//silinecek veri varsa
                     {
                         mikkelDB.LoadDB();
-                        mikkelDB.command = mikkelDB.connection.CreateCommand();
                         mikkelDB.command.CommandText = "DELETE FROM admin WHERE username = @username AND password = @password";
                         mikkelDB.command.Parameters.AddWithValue("@username", kulAdiText.Text);
                         mikkelDB.command.Parameters.AddWithValue("@password", sifreText.Text);

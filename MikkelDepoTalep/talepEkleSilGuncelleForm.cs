@@ -22,7 +22,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "UPDATE talep SET adet=" + numAdet.Value + ", teslim_tarihi='" + dateTeslimTarih.Value.Year + "-" + dateTeslimTarih.Value.Month + "-" + dateTeslimTarih.Value.Day + "' WHERE tedarikci_tel='" + txtTedarikciTel.Text + "' AND urun_barkod='" + txtUrunBarkod.Text + "'";
                     mikkelDB.command.ExecuteNonQuery();
 
@@ -64,7 +63,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO talep (admin_username, tedarikci_tel, urun_barkod, adet, teslim_tarihi) VALUES (@admin_username, @tedarikci_tel, @urun_barkod, @adet, @teslim_tarihi)";
                     mikkelDB.command.Parameters.AddWithValue("@admin_username", adminUserName);
                     mikkelDB.command.Parameters.AddWithValue("@tedarikci_tel", txtTedarikciTel.Text);

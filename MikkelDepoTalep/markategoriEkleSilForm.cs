@@ -30,7 +30,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM "+ typeForDB + " WHERE "+ typeForDB + " = @name";
                     mikkelDB.command.Parameters.AddWithValue("@name", txtMarkaKategori.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -69,7 +68,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO "+ typeForDB + " ("+ typeForDB + ") VALUES (@name)";
                     mikkelDB.command.Parameters.AddWithValue("@name", txtMarkaKategori.Text);
                     mikkelDB.command.ExecuteNonQuery();
@@ -95,7 +93,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "DELETE FROM "+ typeForDB + " WHERE "+ typeForDB + "=@name";
                     mikkelDB.command.Parameters.AddWithValue("@name", txtMarkaKategori.Text);
                     mikkelDB.command.ExecuteNonQuery();

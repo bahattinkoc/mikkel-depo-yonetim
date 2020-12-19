@@ -128,7 +128,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     if (varMi)//sepette var
                     {
                         mikkelDB.command.CommandText = "UPDATE sepet SET adet = adet + @adet, toplam_fiyat = toplam_fiyat + @toplam_fiyat WHERE musteri_tel = @musteri_tel AND urun_barkod = @urun_barkod";
@@ -152,7 +151,6 @@ namespace MikkelDepoTalep
                     mikkelDB.command.ExecuteNonQuery();
 
                     mikkelDB.LoadDB();//depoyu güncelle veya sil
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     if (adetSayar.Value >= adetSayar.Maximum)
                     {
                         mikkelDB.command.CommandText = "DELETE FROM depo WHERE barkod=@barkod";
@@ -223,7 +221,6 @@ namespace MikkelDepoTalep
                     sepetSelectedRowDelete();
 
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "UPDATE depo SET adet = adet + @adet WHERE barkod = @barkod";
                     mikkelDB.command.Parameters.AddWithValue("@adet", _adet);
                     mikkelDB.command.Parameters.AddWithValue("@barkod", _barkod);
@@ -238,7 +235,6 @@ namespace MikkelDepoTalep
                     sepetSelectedRowDelete();
 
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO depo (barkod, adet) VALUES (@barkod, @adet)";
                     mikkelDB.command.Parameters.AddWithValue("@adet", _adet);
                     mikkelDB.command.Parameters.AddWithValue("@barkod", _barkod);
@@ -291,7 +287,6 @@ namespace MikkelDepoTalep
             for (int i = 0; i < n; i++)
             {
                 mikkelDB.LoadDB();
-                mikkelDB.command = mikkelDB.connection.CreateCommand();
                 mikkelDB.command.CommandText = "INSERT INTO satis (admin_username, musteri_tel, urun_no, adet, toplam_fiyat, tarih) VALUES (@admin_username, @musteri_tel, @urun_no, @adet, @toplam_fiyat, @tarih)";
                 mikkelDB.command.Parameters.AddWithValue("@admin_username", username);
                 mikkelDB.command.Parameters.AddWithValue("@musteri_tel", sepet.Rows[i].Cells[0].Value);
@@ -312,8 +307,6 @@ namespace MikkelDepoTalep
                     mikkelDB.command.ExecuteNonQuery();
                 }*/
             }
-
-
 
             mikkelDB.Truncate("sepet");
 

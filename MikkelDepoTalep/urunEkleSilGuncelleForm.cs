@@ -23,15 +23,11 @@ namespace MikkelDepoTalep
 
         private void urunEkleSilGuncelleForm_Load(object sender, EventArgs e)
         {
-            mikkelDB.LoadDB();
-            mikkelDB.command = mikkelDB.connection.CreateCommand();
-            mikkelDB.command.CommandText = "SELECT * FROM kategori";
-            mikkelDB.reader = mikkelDB.command.ExecuteReader();
-            while (mikkelDB.reader.Read())
-                cmbKategori.Items.Add(mikkelDB.reader["kategori"].ToString());
+            
+            mikkelDB.ComboBoxLoader("kategori", "kategori", cmbKategori);
+            mikkelDB.ComboBoxLoader("marka", "marka", cmbKategori);
 
             mikkelDB.LoadDB();
-            mikkelDB.command = mikkelDB.connection.CreateCommand();
             mikkelDB.command.CommandText = "SELECT * FROM marka";
             mikkelDB.reader = mikkelDB.command.ExecuteReader();
             while (mikkelDB.reader.Read())
@@ -59,7 +55,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM urun WHERE barkod=@barkod";
                     mikkelDB.command.Parameters.AddWithValue("@barkod", txtBarkod.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -67,7 +62,6 @@ namespace MikkelDepoTalep
                     if (!mikkelDB.reader.Read())
                     {
                         mikkelDB.LoadDB();
-                        mikkelDB.command = mikkelDB.connection.CreateCommand();
                         mikkelDB.command.CommandText = "INSERT INTO urun (barkod, name, kategori_no, marka_no, fiyat) VALUES (@barkod, @name, @kategori, @marka, @fiyat)";
                         mikkelDB.command.Parameters.AddWithValue("@barkod", txtBarkod.Text);
                         mikkelDB.command.Parameters.AddWithValue("@name", txtAdi.Text);
@@ -100,7 +94,6 @@ namespace MikkelDepoTalep
             if (!String.IsNullOrEmpty(txtBarkod.Text))
             {
                 mikkelDB.LoadDB();
-                mikkelDB.command = mikkelDB.connection.CreateCommand();
                 mikkelDB.command.CommandText = "SELECT * FROM urun WHERE barkod=@barkod";
                 mikkelDB.command.Parameters.AddWithValue("@barkod", txtBarkod.Text);
                 mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -136,7 +129,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "DELETE FROM urun WHERE barkod=@barkod";
                     mikkelDB.command.Parameters.AddWithValue("@barkod", txtBarkod.Text);
                     mikkelDB.command.ExecuteNonQuery();
@@ -162,7 +154,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "UPDATE urun SET name=@name, kategori_no=@kategori, marka_no=@marka, fiyat=@fiyat WHERE barkod=@barkod";
                     mikkelDB.command.Parameters.AddWithValue("@name", txtAdi.Text);
                     mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.SelectedItem.ToString());

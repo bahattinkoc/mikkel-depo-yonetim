@@ -42,7 +42,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO musteri (name, surname, phone, mail, address) VALUES (@adi, @soyadi, @telefon, @mail, @adres)";
                     mikkelDB.command.Parameters.AddWithValue("@adi", txtAdi.Text);
                     mikkelDB.command.Parameters.AddWithValue("@soyadi", txtSoyadi.Text);
@@ -72,7 +71,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM musteri WHERE phone = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();
@@ -81,7 +79,6 @@ namespace MikkelDepoTalep
                         string isim = mikkelDB.reader["name"].ToString() + " " + mikkelDB.reader["surname"].ToString();
 
                         mikkelDB.LoadDB();
-                        mikkelDB.command = mikkelDB.connection.CreateCommand();
                         mikkelDB.command.CommandText = "DELETE FROM musteri WHERE phone = @telefon";
                         mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                         mikkelDB.command.ExecuteNonQuery();
@@ -112,7 +109,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "SELECT * FROM musteri WHERE phone = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.reader = mikkelDB.command.ExecuteReader();

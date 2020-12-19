@@ -35,7 +35,6 @@ namespace MikkelDepoTalep
                 mikkelDB.LoadDB();
                 if (mikkelDB.state)
                 {
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO admin (username, name, surname, password) VALUES (@usernameText, @nameText, @surnameText, @passwordText)";
                     mikkelDB.command.Parameters.AddWithValue("@usernameText", usernameText.Text);
                     mikkelDB.command.Parameters.AddWithValue("@nameText", nameText.Text);

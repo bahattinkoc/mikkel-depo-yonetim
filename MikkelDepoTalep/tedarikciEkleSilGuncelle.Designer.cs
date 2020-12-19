@@ -40,6 +40,10 @@
             this.btnKaydet = new System.Windows.Forms.Button();
             this.txtEposta = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbKategori = new System.Windows.Forms.ComboBox();
+            this.cmbMarka = new System.Windows.Forms.ComboBox();
+            this.label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -112,7 +116,7 @@
             // 
             this.btnGuncelle.Enabled = false;
             this.btnGuncelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnGuncelle.Location = new System.Drawing.Point(12, 338);
+            this.btnGuncelle.Location = new System.Drawing.Point(12, 462);
             this.btnGuncelle.Name = "btnGuncelle";
             this.btnGuncelle.Size = new System.Drawing.Size(278, 32);
             this.btnGuncelle.TabIndex = 7;
@@ -124,7 +128,7 @@
             // 
             this.btnSil.Enabled = false;
             this.btnSil.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnSil.Location = new System.Drawing.Point(12, 300);
+            this.btnSil.Location = new System.Drawing.Point(12, 424);
             this.btnSil.Name = "btnSil";
             this.btnSil.Size = new System.Drawing.Size(278, 32);
             this.btnSil.TabIndex = 6;
@@ -135,7 +139,7 @@
             // btnKaydet
             // 
             this.btnKaydet.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnKaydet.Location = new System.Drawing.Point(12, 262);
+            this.btnKaydet.Location = new System.Drawing.Point(12, 386);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(278, 32);
             this.btnKaydet.TabIndex = 5;
@@ -161,12 +165,56 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "E-Posta";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label6.Location = new System.Drawing.Point(17, 259);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(68, 20);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Kategori";
+            // 
+            // cmbKategori
+            // 
+            this.cmbKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKategori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbKategori.FormattingEnabled = true;
+            this.cmbKategori.Location = new System.Drawing.Point(12, 282);
+            this.cmbKategori.Name = "cmbKategori";
+            this.cmbKategori.Size = new System.Drawing.Size(278, 28);
+            this.cmbKategori.TabIndex = 15;
+            // 
+            // cmbMarka
+            // 
+            this.cmbMarka.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMarka.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbMarka.FormattingEnabled = true;
+            this.cmbMarka.Location = new System.Drawing.Point(12, 336);
+            this.cmbMarka.Name = "cmbMarka";
+            this.cmbMarka.Size = new System.Drawing.Size(278, 28);
+            this.cmbMarka.TabIndex = 17;
+            // 
+            // label
+            // 
+            this.label.AutoSize = true;
+            this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label.Location = new System.Drawing.Point(17, 313);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(53, 20);
+            this.label.TabIndex = 16;
+            this.label.Text = "Marka";
+            // 
             // tedarikciEkleSilGuncelle
             // 
             this.AcceptButton = this.btnKaydet;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 386);
+            this.ClientSize = new System.Drawing.Size(302, 505);
+            this.Controls.Add(this.cmbMarka);
+            this.Controls.Add(this.label);
+            this.Controls.Add(this.cmbKategori);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.txtEposta);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnGuncelle);
@@ -186,6 +234,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tedarikçi İşlemleri";
+            this.Load += new System.EventHandler(this.tedarikciEkleSilGuncelle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +254,9 @@
         private System.Windows.Forms.Button btnKaydet;
         private System.Windows.Forms.TextBox txtEposta;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbKategori;
+        private System.Windows.Forms.ComboBox cmbMarka;
+        private System.Windows.Forms.Label label;
     }
 }

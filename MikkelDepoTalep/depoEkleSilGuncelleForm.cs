@@ -24,7 +24,6 @@ namespace MikkelDepoTalep
         void cmbListele(ComboBox cmb, string command, string show)
         {
             mikkelDB.LoadDB();
-            mikkelDB.command = mikkelDB.connection.CreateCommand();
             mikkelDB.command.CommandText = "SELECT * FROM " + command;
             mikkelDB.reader = mikkelDB.command.ExecuteReader();
             cmb.Items.Clear();
@@ -58,7 +57,6 @@ namespace MikkelDepoTalep
             if (!String.IsNullOrEmpty(barkod))
             {
                 mikkelDB.LoadDB();
-                mikkelDB.command = mikkelDB.connection.CreateCommand();
                 mikkelDB.command.CommandText = "DELETE FROM depo WHERE barkod=@barkod";
                 mikkelDB.command.Parameters.AddWithValue("@barkod", barkod);
                 mikkelDB.command.ExecuteNonQuery();
@@ -77,7 +75,6 @@ namespace MikkelDepoTalep
             if (!String.IsNullOrEmpty(barkod))
             {
                 mikkelDB.LoadDB();
-                mikkelDB.command = mikkelDB.connection.CreateCommand();
                 mikkelDB.command.CommandText = "UPDATE depo SET adet=@adet WHERE barkod=@barkod";
                 mikkelDB.command.Parameters.AddWithValue("@barkod", barkod);
                 mikkelDB.command.Parameters.AddWithValue("@adet", numericUpDown1.Value);
@@ -136,7 +133,6 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
                     mikkelDB.command.CommandText = "INSERT INTO depo (barkod, adet) VALUES (@barkod, @adet)";
                     mikkelDB.command.Parameters.AddWithValue("@barkod", barkod);
                     mikkelDB.command.Parameters.AddWithValue("@adet", numericUpDown1.Value);
