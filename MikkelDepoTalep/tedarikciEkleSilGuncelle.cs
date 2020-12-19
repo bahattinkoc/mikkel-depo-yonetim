@@ -154,7 +154,7 @@ namespace MikkelDepoTalep
                     mikkelDB.command.ExecuteNonQuery();
 
                     mikkelDB.LoadDB();
-                    mikkelDB.command.CommandText = "UPDATE tedarikci_mk SET kategori=@kategori, marka=@marka WHERE phone = @telefon";
+                    mikkelDB.command.CommandText = "UPDATE tedarikci_mk SET kategori=@kategori, marka=@marka WHERE tedarikci_tel = @telefon";
                     mikkelDB.command.Parameters.AddWithValue("@telefon", txtTelefon.Text);
                     mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.Text);
                     mikkelDB.command.Parameters.AddWithValue("@marka", cmbMarka.Text);
