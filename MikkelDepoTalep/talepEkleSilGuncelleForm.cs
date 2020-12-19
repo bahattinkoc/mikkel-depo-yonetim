@@ -17,7 +17,7 @@ namespace MikkelDepoTalep
 
         private void btnGüncelle_Click(object sender, EventArgs e)
         {
-            if (dateTeslimTarih.Value > DateTime.Now && !String.IsNullOrEmpty(txtTedarikciShow.Text) & !String.IsNullOrEmpty(txtBarkodShow.Text))
+            if (dateTeslimTarih.Value > DateTime.Now && !String.IsNullOrEmpty(txtTedarikciShow.Text) && !String.IsNullOrEmpty(txtBarkodShow.Text) && tedarikciKategoriMarkaKontrol())
             {
                 try
                 {
@@ -35,7 +35,7 @@ namespace MikkelDepoTalep
             }
             else
             {
-                MessageBox.Show("Bu uyarının sebepleri;\n* Bugün haricinde ileri bir tarih seçiniz!\n* Geçerli bir tedarikci ve urun kodu giriniz!", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bu uyarının sebepleri;\n* Bugün haricinde ileri bir tarih seçiniz!\n* Geçerli bir tedarikci ve urun kodu giriniz!\n* Tedarikçinin getiremeyeceği ürün girmeyiniz", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -56,9 +56,17 @@ namespace MikkelDepoTalep
             adminUserName = _adminUserName;
         }
 
+        bool tedarikciKategoriMarkaKontrol()
+        {
+            string kategori = mikkelDB.GetValue("SELECT * FROM urun WHERE barkod='" + txtTedarikciTel.Text + "'", "kategori");
+            string marka = mikkelDB.GetValue("SELECT * FROM urun WHERE barkod='" + txtTedarikciTel.Text + "'", "marka");
+            string tedTel = mikkelDB.GetValue("SELECT * FROM tedarikci_mk WHERE kategori='" + kategori + "' AND marka='" + marka + "'", "tedarikci_tel");
+            return (tedTel == txtTedarikciTel.Text) ? true : false;
+        }
+
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if(dateTeslimTarih.Value > DateTime.Now && !String.IsNullOrEmpty(txtTedarikciShow.Text) & !String.IsNullOrEmpty(txtBarkodShow.Text))
+            if(dateTeslimTarih.Value > DateTime.Now && !String.IsNullOrEmpty(txtTedarikciShow.Text) && !String.IsNullOrEmpty(txtBarkodShow.Text) && tedarikciKategoriMarkaKontrol())
             {
                 try
                 {
@@ -81,7 +89,7 @@ namespace MikkelDepoTalep
             }
             else
             {
-                MessageBox.Show("Bu uyarının sebepleri;\n* Bugün haricinde ileri bir tarih seçiniz!\n* Geçerli bir tedarikci ve urun kodu giriniz!", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bu uyarının sebepleri;\n* Bugün haricinde ileri bir tarih seçiniz!\n* Geçerli bir tedarikci ve urun kodu giriniz!\n* Tedarikçinin getiremeyeceği ürün girmeyiniz", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

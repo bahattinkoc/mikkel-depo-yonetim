@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Resources;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MikkelDepoTalep
@@ -296,16 +288,22 @@ namespace MikkelDepoTalep
                 mikkelDB.command.Parameters.AddWithValue("@tarih", DateTime.Now.Year + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day);
                 mikkelDB.command.ExecuteNonQuery();
 
-                /*int urunAdet = Convert.ToInt32(mikkelDB.GetValue("SELECT * FROM depo WHERE barkod='" + sepet.Rows[i].Cells[2].Value + "'", "adet"));
-                if(urunAdet <= Properties.Settings.Default.talepSınır)
+                string urunAdet = mikkelDB.GetValue("SELECT * FROM depo WHERE barkod='" + sepet.Rows[i].Cells[2].Value + "'", "adet");
+                if(Convert.ToInt32(urunAdet) <= Properties.Settings.Default.talepSınır || String.IsNullOrEmpty(urunAdet))
                 {
-                    string tedTel = "";//Halledilecek iş var. Kontrol edilecek ürünün
+                    //Ürün talep listesinde yoksa talep oluştur
+                    if(String.IsNullOrEmpty(mikkelDB.GetValue("SELECT * FROM talep WHERE urun_barkod='"+ sepet.Rows[i].Cells[2].Value + "'", "urun_barkod")))
+                    {
+                        string kategori = mikkelDB.GetValue("SELECT * FROM urun WHERE barkod='" + sepet.Rows[i].Cells[2].Value + "'", "kategori");
+                        string marka = mikkelDB.GetValue("SELECT * FROM urun WHERE barkod='" + sepet.Rows[i].Cells[2].Value + "'", "marka");
+                        string tedTel = mikkelDB.GetValue("SELECT * FROM tedarikci_mk WHERE kategori='" + kategori + "' AND marka='" + marka + "'", "tedarikci_tel");
 
-                    mikkelDB.LoadDB();
-                    mikkelDB.command = mikkelDB.connection.CreateCommand();
-                    mikkelDB.command.CommandText = "INSERT INTO talep (admin_username, tedarikci_tel, urun_barkod, adet, teslim_tarihi) VALUES ('"+username+"', '"+tedTel+"', '"+ sepet.Rows[i].Cells[2].Value + "', "+Properties.Settings.Default.talepMiktar+", '"+ Convert.ToString(DateTime.Now.AddDays(Properties.Settings.Default.teslimGun).ToShortDateString().Replace(".", "-")) + ")";
-                    mikkelDB.command.ExecuteNonQuery();
-                }*/
+                        mikkelDB.LoadDB();
+                        mikkelDB.command = mikkelDB.connection.CreateCommand();
+                        mikkelDB.command.CommandText = "INSERT INTO talep (admin_username, tedarikci_tel, urun_barkod, adet, teslim_tarihi) VALUES ('" + username + "', '" + tedTel + "', '" + sepet.Rows[i].Cells[2].Value + "', " + Properties.Settings.Default.talepMiktar + ", '" + DateTime.Now.AddDays(Properties.Settings.Default.teslimGun).ToString("yyyy-MM-dd") + "')";
+                        mikkelDB.command.ExecuteNonQuery();
+                    }
+                }
             }
 
             mikkelDB.Truncate("sepet");

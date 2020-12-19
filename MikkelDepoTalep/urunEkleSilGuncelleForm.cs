@@ -62,7 +62,7 @@ namespace MikkelDepoTalep
                     if (!mikkelDB.reader.Read())
                     {
                         mikkelDB.LoadDB();
-                        mikkelDB.command.CommandText = "INSERT INTO urun (barkod, name, kategori_no, marka_no, fiyat) VALUES (@barkod, @name, @kategori, @marka, @fiyat)";
+                        mikkelDB.command.CommandText = "INSERT INTO urun (barkod, name, kategori, marka, fiyat) VALUES (@barkod, @name, @kategori, @marka, @fiyat)";
                         mikkelDB.command.Parameters.AddWithValue("@barkod", txtBarkod.Text);
                         mikkelDB.command.Parameters.AddWithValue("@name", txtAdi.Text);
                         mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.SelectedItem.ToString());
@@ -101,8 +101,8 @@ namespace MikkelDepoTalep
                 if (mikkelDB.reader.Read())
                 {
                     txtAdi.Text = mikkelDB.reader["name"].ToString();
-                    cmbKategori.SelectedItem = mikkelDB.reader["kategori_no"].ToString();
-                    cmbMarka.SelectedItem = mikkelDB.reader["marka_no"].ToString();
+                    cmbKategori.SelectedItem = mikkelDB.reader["kategori"].ToString();
+                    cmbMarka.SelectedItem = mikkelDB.reader["marka"].ToString();
                     txtFiyat.Text = mikkelDB.reader["fiyat"].ToString();
 
                     btnKaydet.Enabled = false;
@@ -154,7 +154,7 @@ namespace MikkelDepoTalep
                 try
                 {
                     mikkelDB.LoadDB();
-                    mikkelDB.command.CommandText = "UPDATE urun SET name=@name, kategori_no=@kategori, marka_no=@marka, fiyat=@fiyat WHERE barkod=@barkod";
+                    mikkelDB.command.CommandText = "UPDATE urun SET name=@name, kategori=@kategori, marka=@marka, fiyat=@fiyat WHERE barkod=@barkod";
                     mikkelDB.command.Parameters.AddWithValue("@name", txtAdi.Text);
                     mikkelDB.command.Parameters.AddWithValue("@kategori", cmbKategori.SelectedItem.ToString());
                     mikkelDB.command.Parameters.AddWithValue("@marka", cmbMarka.SelectedItem.ToString());
