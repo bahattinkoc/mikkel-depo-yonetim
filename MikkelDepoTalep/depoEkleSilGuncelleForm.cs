@@ -36,7 +36,7 @@ namespace MikkelDepoTalep
             barkod = mikkelDB.GetValue("SELECT * FROM urun WHERE name='" + urun + "' AND kategori='" + kategori + "' AND marka='" + marka + "'", "barkod");
             adet = mikkelDB.GetValue("SELECT * FROM depo WHERE barkod='"+barkod+"'", "adet");
 
-            if (!String.IsNullOrEmpty(adet) && !String.IsNullOrEmpty(urun))
+            if (!String.IsNullOrEmpty(adet) && !String.IsNullOrEmpty(urun) && !String.IsNullOrEmpty(cmbUrun.Text))
             {
                 btnKaydet.Enabled = false;
                 btnSil.Enabled = true;
@@ -128,7 +128,7 @@ namespace MikkelDepoTalep
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if(!String.IsNullOrEmpty(kategori) && !String.IsNullOrEmpty(marka) && !String.IsNullOrEmpty(urun))
+            if(!String.IsNullOrEmpty(cmbKategori.Text) && !String.IsNullOrEmpty(cmbMarka.Text) && !String.IsNullOrEmpty(cmbUrun.Text))
             {
                 try
                 {
