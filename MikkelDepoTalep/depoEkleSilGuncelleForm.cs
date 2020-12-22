@@ -33,7 +33,7 @@ namespace MikkelDepoTalep
 
         void butonChange()
         {
-            barkod = mikkelDB.GetValue("SELECT * FROM urun WHERE name='" + urun + "' AND kategori_no='" + kategori + "' AND marka_no='" + marka + "'", "barkod");
+            barkod = mikkelDB.GetValue("SELECT * FROM urun WHERE name='" + urun + "' AND kategori='" + kategori + "' AND marka='" + marka + "'", "barkod");
             adet = mikkelDB.GetValue("SELECT * FROM depo WHERE barkod='"+barkod+"'", "adet");
 
             if (!String.IsNullOrEmpty(adet) && !String.IsNullOrEmpty(urun))
@@ -95,7 +95,7 @@ namespace MikkelDepoTalep
             cmbListele(cmbMarka, "marka", "marka");
 
             if (!String.IsNullOrEmpty(marka) && !String.IsNullOrEmpty(kategori))
-                cmbListele(cmbUrun, "urun WHERE kategori_no='" + kategori + "' AND marka_no='" + marka + "'", "name");
+                cmbListele(cmbUrun, "urun WHERE kategori='" + kategori + "' AND marka='" + marka + "'", "name");
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
