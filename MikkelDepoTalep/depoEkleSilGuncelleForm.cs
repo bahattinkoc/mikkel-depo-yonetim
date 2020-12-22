@@ -115,7 +115,7 @@ namespace MikkelDepoTalep
 
             if(!String.IsNullOrEmpty(marka) && !String.IsNullOrEmpty(kategori))
             {
-                cmbListele(cmbUrun, "urun WHERE kategori_no='" + kategori + "' AND marka_no='" + marka + "'", "name");
+                cmbListele(cmbUrun, "urun WHERE kategori='" + kategori + "' AND marka='" + marka + "'", "name");
                 butonChange();
             }
         }
