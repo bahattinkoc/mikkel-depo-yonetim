@@ -37,7 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dbStateText = new System.Windows.Forms.Label();
-            this.kayitSilButon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -115,7 +114,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(72, 293);
+            this.label4.Location = new System.Drawing.Point(72, 267);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 20);
             this.label4.TabIndex = 7;
@@ -125,29 +124,17 @@
             // 
             this.dbStateText.AutoSize = true;
             this.dbStateText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dbStateText.Location = new System.Drawing.Point(218, 293);
+            this.dbStateText.Location = new System.Drawing.Point(218, 267);
             this.dbStateText.Name = "dbStateText";
             this.dbStateText.Size = new System.Drawing.Size(0, 20);
             this.dbStateText.TabIndex = 8;
-            // 
-            // kayitSilButon
-            // 
-            this.kayitSilButon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.kayitSilButon.Location = new System.Drawing.Point(64, 248);
-            this.kayitSilButon.Name = "kayitSilButon";
-            this.kayitSilButon.Size = new System.Drawing.Size(148, 32);
-            this.kayitSilButon.TabIndex = 9;
-            this.kayitSilButon.Text = "Kaydımı Sil";
-            this.kayitSilButon.UseVisualStyleBackColor = true;
-            this.kayitSilButon.Click += new System.EventHandler(this.kayitSilButon_Click);
             // 
             // LogInForm
             // 
             this.AcceptButton = this.girisYapButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 322);
-            this.Controls.Add(this.kayitSilButon);
+            this.ClientSize = new System.Drawing.Size(285, 296);
             this.Controls.Add(this.dbStateText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -181,7 +168,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label dbStateText;
-        private System.Windows.Forms.Button kayitSilButon;
     }
 }
 

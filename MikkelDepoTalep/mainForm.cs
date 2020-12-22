@@ -273,6 +273,12 @@ namespace MikkelDepoTalep
             set.ShowDialog();
         }
 
+        private void bilgileriGüncelleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            adminKayitForm aKF = new adminKayitForm(username);
+            aKF.ShowDialog();
+        }
+
         private void btnSatis_Click(object sender, EventArgs e)
         {
             int n = sepet.RowCount;

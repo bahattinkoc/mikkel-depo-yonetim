@@ -38,6 +38,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.passText = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnSil = new System.Windows.Forms.Button();
+            this.btnGuncelle = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // kayitButton
@@ -47,7 +49,7 @@
             this.kayitButton.Name = "kayitButton";
             this.kayitButton.Size = new System.Drawing.Size(322, 44);
             this.kayitButton.TabIndex = 6;
-            this.kayitButton.Text = "Kaydı Tamamla";
+            this.kayitButton.Text = "Kaydet";
             this.kayitButton.UseVisualStyleBackColor = true;
             this.kayitButton.Click += new System.EventHandler(this.kayitButton_Click);
             // 
@@ -69,6 +71,7 @@
             this.usernameText.Name = "usernameText";
             this.usernameText.Size = new System.Drawing.Size(322, 26);
             this.usernameText.TabIndex = 2;
+            this.usernameText.TextChanged += new System.EventHandler(this.usernameText_TextChanged);
             // 
             // label3
             // 
@@ -120,6 +123,7 @@
             // 
             this.passText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.passText.Location = new System.Drawing.Point(8, 251);
+            this.passText.MaxLength = 20;
             this.passText.Name = "passText";
             this.passText.PasswordChar = '*';
             this.passText.Size = new System.Drawing.Size(322, 26);
@@ -135,12 +139,38 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Şifreniz";
             // 
+            // btnSil
+            // 
+            this.btnSil.Enabled = false;
+            this.btnSil.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSil.Location = new System.Drawing.Point(8, 358);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(322, 44);
+            this.btnSil.TabIndex = 11;
+            this.btnSil.Text = "Sil";
+            this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
+            // 
+            // btnGuncelle
+            // 
+            this.btnGuncelle.Enabled = false;
+            this.btnGuncelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnGuncelle.Location = new System.Drawing.Point(8, 408);
+            this.btnGuncelle.Name = "btnGuncelle";
+            this.btnGuncelle.Size = new System.Drawing.Size(322, 44);
+            this.btnGuncelle.TabIndex = 12;
+            this.btnGuncelle.Text = "Güncelle";
+            this.btnGuncelle.UseVisualStyleBackColor = true;
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
+            // 
             // adminKayitForm
             // 
             this.AcceptButton = this.kayitButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 364);
+            this.ClientSize = new System.Drawing.Size(342, 461);
+            this.Controls.Add(this.btnGuncelle);
+            this.Controls.Add(this.btnSil);
             this.Controls.Add(this.passText);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.surnameText);
@@ -175,5 +205,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox passText;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSil;
+        private System.Windows.Forms.Button btnGuncelle;
     }
 }

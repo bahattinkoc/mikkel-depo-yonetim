@@ -82,43 +82,8 @@ namespace MikkelDepoTalep
 
         private void uyeKaydiButton_Click(object sender, EventArgs e)
         {
-            adminKayitForm akF = new adminKayitForm();
+            adminKayitForm akF = new adminKayitForm(String.Empty);
             akF.ShowDialog();
-        }
-
-        private void kayitSilButon_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(kulAdiText.Text) && !String.IsNullOrEmpty(sifreText.Text))
-            {
-                try
-                {
-                    mikkelDB.LoadDB();
-                    mikkelDB.command.CommandText = "SELECT * FROM admin WHERE username = @username AND password = @password";
-                    mikkelDB.command.Parameters.AddWithValue("@username", kulAdiText.Text);
-                    mikkelDB.command.Parameters.AddWithValue("@password", sifreText.Text);
-                    mikkelDB.reader = mikkelDB.command.ExecuteReader();
-
-                    if (mikkelDB.reader.Read())//silinecek veri varsa
-                    {
-                        mikkelDB.LoadDB();
-                        mikkelDB.command.CommandText = "DELETE FROM admin WHERE username = @username AND password = @password";
-                        mikkelDB.command.Parameters.AddWithValue("@username", kulAdiText.Text);
-                        mikkelDB.command.Parameters.AddWithValue("@password", sifreText.Text);
-                        mikkelDB.reader = mikkelDB.command.ExecuteReader();
-                        MessageBox.Show("Silme işlemi başarılı!", "Admin Silindi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        kulAdiText.Clear();
-                        sifreText.Clear();
-                    }
-                    else
-                        MessageBox.Show("Silinecek kayıt bulunamadı!", "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show("Silme işlemi gerçekleştirilemedi! Hatanın sebebi;\n" + error.Message, "HATA", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-                MessageBox.Show("Gerekli alanları boş bırakmayınız!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
