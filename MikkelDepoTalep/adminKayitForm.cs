@@ -22,6 +22,10 @@ namespace MikkelDepoTalep
             {
                 usernameText.Text = username;
                 usernameText.Enabled = false;
+
+                this.Text = "Admin Güncelleme Paneli";
+                label2.Text = "Admin Güncelleme Formu";
+
             }
             Fill();
         }
